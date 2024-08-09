@@ -30,9 +30,9 @@ public class ConsultDetailController {
     private final AccountService accountService;
     private final ConsultDetailService consultDetailService;
 
-    // 가장 최근 상담 내역 조회
+    // 가장 최근에 받은 상담 조회
     @GetMapping("/latest")
-    @Operation(summary = "가장 최근에 받은 상담")
+    @Operation(summary = "가장 최근에 받은 상담 조회")
     public LatestConsultDetailResDto getLatestConsultDetail(@AuthenticationPrincipal PrincipalDetails principalDetails) {
         return consultDetailService.getLatestConsultDetailResponse(principalDetails);
     }
@@ -42,7 +42,7 @@ public class ConsultDetailController {
     @Operation(summary = "전체 상담 내역 조회")
     public ConsultDetailPageDto getConsultDetails(
             @AuthenticationPrincipal PrincipalDetails principalDetails,
-            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "0") int page, // 페이지 번호를 0부터 시작
             @RequestParam(defaultValue = "9") int size
     ) {
         // 페이지 번호와 크기에 대한 유효성 검사
@@ -51,8 +51,7 @@ public class ConsultDetailController {
             throw new ErrorException(ErrorCode.REQUEST_ERROR);
         }
 
-        // Pageable 객체 생성 - page는 1부터 시작하므로, 0 기반 인덱스로 변환하기 위해 1을 뺍니다.
-        Pageable pageable = PageRequest.of(page - 1, size);
+        Pageable pageable = PageRequest.of(page, size);
         return consultDetailService.findAllConsultDetail(principalDetails, pageable);
     }
 

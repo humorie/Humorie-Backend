@@ -10,12 +10,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface ConsultDetailRepository extends JpaRepository<ConsultDetail, Long> {
-    // 가장 최근 상담 내역 조회
+    // 가장 최근에 받은 상담 조회
     @Query("SELECT c FROM ConsultDetail c WHERE c.account = :account ORDER BY c.reservation.counselDate DESC")
-    Optional<ConsultDetail> findLatestConsultDetail(@Param("account") AccountDetail account);
+    List<ConsultDetail> findLatestConsultDetail(@Param("account") AccountDetail account, Pageable pageable);
 
     // 상담 내역 전체 조회
     @Query("SELECT c FROM ConsultDetail c WHERE c.account = :account ORDER BY c.reservation.counselDate DESC")

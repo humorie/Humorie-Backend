@@ -1,7 +1,7 @@
 package com.example.humorie.account.service;
 
 
-import com.example.humorie.account.config.SecurityConfig;
+import com.example.humorie.global.config.SecurityConfig;
 import com.example.humorie.account.dto.response.TokenDto;
 import com.example.humorie.account.dto.request.JoinReq;
 import com.example.humorie.account.dto.request.LoginReq;
@@ -133,6 +133,14 @@ public class AccountService {
         } else {
             throw new ErrorException(ErrorCode.NONE_EXIST_USER);
         }
+    }
+
+    public String isAccountNameAvailable(String accountName) {
+        if(accountRepository.existsByAccountName(accountName)) {
+            throw new ErrorException(ErrorCode.ID_EXISTS);
+        }
+
+        return "The account name is available";
     }
 }
 

@@ -9,15 +9,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "consult_detail")
 public class ConsultDetail {
     @Id

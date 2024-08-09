@@ -53,7 +53,7 @@ public class ReviewService {
 
         counselor.setReviewCount(counselor.getReviewCount() + 1);
 
-        List<Review> reviews = reviewRepository.findAllByCounselorId(counselorId);
+        List<Review> reviews = reviewRepository.findByCounselorId(counselorId);
         double averageRating = reviews.stream()
                 .mapToDouble(Review::getRating)
                 .average()
@@ -114,7 +114,7 @@ public class ReviewService {
     }
 
     public List<ReviewRes> getReviewListByCounselor(long counselorId) {
-        List<Review> reviews = reviewRepository.findAllByCounselorId(counselorId);
+        List<Review> reviews = reviewRepository.findByCounselorId(counselorId);
 
         return reviews.stream()
                 .sorted(Comparator.comparingDouble(Review::getRating).reversed())

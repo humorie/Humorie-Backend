@@ -14,28 +14,14 @@ public class ConsultDetailPageDto {
     private final int totalPages;
 
     public ConsultDetailPageDto(Page<ConsultDetailListDto> consultDetailPage) {
-        this.consultDetails = consultDetailPage.getContent();
-        this.pageNumber = consultDetailPage.getNumber();
-        this.pageSize = consultDetailPage.getSize();
-        this.totalElements = consultDetailPage.getTotalElements();
-        this.totalPages = consultDetailPage.getTotalPages();
-    }
-
-    public ConsultDetailPageDto(List<ConsultDetailListDto> consultDetails, int pageNumber, int pageSize, long totalElements, int totalPages) {
-        this.consultDetails = consultDetails;
-        this.pageNumber = pageNumber;
-        this.pageSize = pageSize;
-        this.totalElements = totalElements;
-        this.totalPages = totalPages;
+        this.consultDetails = consultDetailPage.getContent(); // 현재 페이지에 있는 데이터 목록
+        this.pageNumber = consultDetailPage.getNumber(); // 현재 페이지 번호
+        this.pageSize = consultDetailPage.getSize(); // 한 페이지에 표시되는 항목 수
+        this.totalElements = consultDetailPage.getTotalElements(); // 전체 항목 수
+        this.totalPages = consultDetailPage.getTotalPages(); // 총 페이지 수
     }
 
     public static ConsultDetailPageDto from(Page<ConsultDetailListDto> consultDetailPage) {
-        return new ConsultDetailPageDto(
-                consultDetailPage.getContent(),
-                consultDetailPage.getNumber(),
-                consultDetailPage.getSize(),
-                consultDetailPage.getTotalElements(),
-                consultDetailPage.getTotalPages()
-        );
+        return new ConsultDetailPageDto(consultDetailPage);
     }
 }

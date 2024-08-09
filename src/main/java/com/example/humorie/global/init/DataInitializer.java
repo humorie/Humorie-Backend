@@ -1,5 +1,7 @@
 package com.example.humorie.global.init;
 
+import com.example.humorie.consult_detail.entity.ConsultDetail;
+import com.example.humorie.consult_detail.repository.ConsultDetailRepository;
 import com.example.humorie.global.config.SecurityConfig;
 import com.example.humorie.account.entity.AccountDetail;
 import com.example.humorie.account.repository.AccountRepository;
@@ -37,6 +39,7 @@ public class DataInitializer implements CommandLineRunner {
     private final PointRepository pointRepository;
     private final ReservationRepository reservationRepository;
     private final SecurityConfig securityConfig;
+    private final ConsultDetailRepository consultDetailRepository;
 
 
     @Override
@@ -217,6 +220,25 @@ public class DataInitializer implements CommandLineRunner {
         Reservation reservation3 = Reservation.builder().counselDate(LocalDate.of(2024,8,20)).account(accountDetail1).counselTime(LocalTime.of(12,0)).location("서울 강남구").counselor(counselor3).build();
         Reservation reservation4 = Reservation.builder().counselDate(LocalDate.of(2024,8,21)).account(accountDetail2).counselTime(LocalTime.of(12,0)).location("서울 강남구").counselor(counselor2).build();
 
+        ConsultDetail consultDetail1 = ConsultDetail.builder()
+                .status(true)
+                .account(accountDetail1)
+                .counselor(counselor1)
+                .reservation(reservation1)
+                .content("상담 내용 1")
+                .symptom("증상 1")
+                .title("상담 제목 1")
+                .build();
+
+        ConsultDetail consultDetail3 = ConsultDetail.builder()
+                .status(false)
+                .account(accountDetail1)
+                .counselor(counselor3)
+                .reservation(reservation3)
+                .content("상담 내용 3")
+                .symptom("증상 3")
+                .title("상담 제목 3")
+                .build();
 
 
         counselorRepository.saveAll(Arrays.asList(counselor1, counselor2, counselor3, counselor4, counselor5, counselor6));
@@ -229,6 +251,6 @@ public class DataInitializer implements CommandLineRunner {
         careerRepository.saveAll(Arrays.asList(career1, career2, career3, career4, career5, career6, career7, career8));
         pointRepository.saveAll(Arrays.asList(point1, point2, point3, point4, point5, point6, point7));
         reservationRepository.saveAll(Arrays.asList(reservation1, reservation2, reservation3, reservation4));
-
+        consultDetailRepository.saveAll(Arrays.asList(consultDetail1, consultDetail3));
     }
 }
