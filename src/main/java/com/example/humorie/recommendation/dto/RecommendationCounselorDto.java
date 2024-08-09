@@ -18,16 +18,13 @@ public class RecommendationCounselorDto {
 
     private final int reviewCount;
 
-    private final double recommendationRating;
-
     public RecommendationCounselorDto(long id, String name, Set<String> counselingFields,
-                                      double rating, int reviewCount, double recommendationRating){
+                                      double rating, int reviewCount){
         this.id = id;
         this.name = name;
         this.counselingFields = counselingFields;
         this.rating = rating;
         this.reviewCount = reviewCount;
-        this.recommendationRating = recommendationRating;
     }
 
 }

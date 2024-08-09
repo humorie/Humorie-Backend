@@ -33,24 +33,17 @@ public enum ErrorCode {
     INVALID_PASSWORD(false, 2007, "잘못된 비밀번호 형식입니다. 비밀번호는 최소 8자 이상 16자 이하이며, 적어도 하나의 숫자와 알파벳, 특수문자가 포함되어야 합니다."),
     INVALID_ID(false, 2008, "잘못된 아이디 형식입니다. 아이디는 최소 6자 이상이어야 하며, 소문자 알파벳과 숫자로 구성되어야 합니다."),
     SEND_EMAIL_FAILED(false, 2009, "이메일 전송에 실패했습니다."),
-    NONE_EXIST_RESERVATION(false, 2010, "존재하지 않는 예약입니다."),
-    INCOMPLETE_PAYMENT(false, 2011, "완료되지 않은 결제입니다."),
-    SUSPECTED_PAYMENT_FORGERY(false, 2011, "위변조 의심 결제입니다."),
-    EXCEED_POINT(false, 2012, "포인트가 초과되었습니다."),
-    NONE_EXIST_REVIEW(false, 2013, "존재하지 않는 리뷰입니다."),
-    REVIEW_PERMISSION_DENIED(false, 2014, "본인이 작성한 리뷰만 수정, 삭제할 수 있습니다."),
-    INVALID_NAME(false, 2015, "잘못된 이름 형식입니다."),
-    EXCEED_POINT(false, 2016, "포인트가 초과되었습니다."),
-    EMPTY_NAME(false, 2017, "이름을 입력해주세요"),
-    EXCEED_POINT(false, 2018, "포인트가 초과되었습니다."),
-    EMPTY_EMAIL(false, 2019, "이메일을 입력해주세요"),
-    EMPTY_PASSWORD(false, 2020, "비밀번를 입력해주세요"),
-
+    REVIEW_PERMISSION_DENIED(false, 2010, "본인이 작성한 리뷰만 수정, 삭제할 수 있습니다."),
+    INVALID_NAME(false, 2011, "잘못된 이름 형식입니다."),
+    REVIEW_PERMISSION_DENIED(false, 2012, "본인이 작성한 리뷰만 수정, 삭제할 수 있습니다."),
+    INVALID_NAME(false, 2013, "잘못된 이름 형식입니다."),
+    EMPTY_NAME(false, 2014, "이름을 입력해주세요"),
+    EMPTY_EMAIL(false, 2015, "이메일을 입력해주세요"),
+    EMPTY_PASSWORD(false, 2016, "비밀번를 입력해주세요"),
 
     /**
      * 3000 : Response 오류
      */
-
     // counselor
     NON_EXIST_COUNSELOR(false, 3001, "존재하지 않는 상담사입니다."),
     BOOKMARK_EXISTS(false, 3002, "해당 상담사에 대한 북마크가 이미 존재합니다."),
@@ -60,7 +53,13 @@ public enum ErrorCode {
 
     // consult_detail
     NONE_EXIST_CONSULT_DETAIL(false, 3006, "존재하지 않는 상담 내역입니다."),
-    CONSULT_DETAIL_NOT_COMPLETED(false, 3007, "상담 내용을 작성하고 있는 중이에요");
+    CONSULT_DETAIL_NOT_COMPLETED(false, 3007, "상담 내용을 작성하고 있는 중이에요")
+      
+    NONE_EXIST_RESERVATION(false, 3008, "존재하지 않는 예약입니다."),
+    INCOMPLETE_PAYMENT(false, 3009, "완료되지 않은 결제입니다."),
+    SUSPECTED_PAYMENT_FORGERY(false, 3010, "위변조 의심 결제입니다."),
+    EXCEED_POINT(false, 3011, "포인트가 초과되었습니다."),
+    NONE_EXIST_REVIEW(false, 3012, "존재하지 않는 리뷰 입니다.");
 
     private final boolean isSuccess;
 

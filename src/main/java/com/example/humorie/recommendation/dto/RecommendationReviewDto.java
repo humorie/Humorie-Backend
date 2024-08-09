@@ -19,15 +19,12 @@ public class RecommendationReviewDto {
 
     private final String accountName;
 
-    private final double recommendationRating;
-
-    public RecommendationReviewDto(long id, String content, double rating, int recommendationCount, LocalDateTime createdAt, String accountName, double recommendationRating) {
+    public RecommendationReviewDto(long id, String content, double rating, int recommendationCount, LocalDateTime createdAt, String accountName) {
         this.id = id;
         this.content = content;
         this.rating = rating;
         this.recommendationCount = recommendationCount;
         this.createdAt = createdAt;
         this.accountName = accountName;
-        this.recommendationRating = recommendationRating;
     }
 }
