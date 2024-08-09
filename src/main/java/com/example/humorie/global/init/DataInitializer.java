@@ -9,6 +9,9 @@ import com.example.humorie.consultant.review.entity.Review;
 import com.example.humorie.consultant.review.repository.ReviewRepository;
 import com.example.humorie.mypage.entity.Point;
 import com.example.humorie.mypage.repository.PointRepository;
+import com.example.humorie.payment.entity.Payment;
+import com.example.humorie.payment.entity.PaymentStatus;
+import com.example.humorie.payment.repository.PaymentRepository;
 import com.example.humorie.reservation.entity.Reservation;
 import com.example.humorie.reservation.repository.ReservationRepository;
 import jakarta.transaction.Transactional;
@@ -20,6 +23,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -36,6 +40,7 @@ public class DataInitializer implements CommandLineRunner {
     private final ReviewRepository reviewRepository;
     private final PointRepository pointRepository;
     private final ReservationRepository reservationRepository;
+    private final PaymentRepository paymentRepository;
     private final SecurityConfig securityConfig;
 
 
@@ -212,10 +217,26 @@ public class DataInitializer implements CommandLineRunner {
         Point point6 = Point.builder().points(100000).type("earn").title("리뷰 작성").transactionDate(LocalDateTime.of(2024, 5, 9, 12, 30, 00)).account(accountDetail2).build();
         Point point7 = Point.builder().points(70000).type("spend").title("상담 예약").transactionDate(LocalDateTime.of(2024, 5, 17, 12, 30, 00)).account(accountDetail2).build();
 
-        Reservation reservation1 = Reservation.builder().counselDate(LocalDate.of(2024,8,18)).account(accountDetail1).counselTime(LocalTime.of(12,0)).location("서울 강남구").counselor(counselor1).build();
-        Reservation reservation2 = Reservation.builder().counselDate(LocalDate.of(2024,8,19)).account(accountDetail2).counselTime(LocalTime.of(12,0)).location("서울 강남구").counselor(counselor2).build();
-        Reservation reservation3 = Reservation.builder().counselDate(LocalDate.of(2024,8,20)).account(accountDetail1).counselTime(LocalTime.of(12,0)).location("서울 강남구").counselor(counselor3).build();
-        Reservation reservation4 = Reservation.builder().counselDate(LocalDate.of(2024,8,21)).account(accountDetail2).counselTime(LocalTime.of(12,0)).location("서울 강남구").counselor(counselor2).build();
+
+        Payment payment1 = Payment.builder().price(5000).point(0).finalPrice(5000).status(PaymentStatus.READY).build();
+        Payment payment2 = Payment.builder().price(10000).point(1000).finalPrice(9000).status(PaymentStatus.READY).build();
+        Payment payment3 = Payment.builder().price(15000).point(5000).finalPrice(10000).status(PaymentStatus.READY).build();
+        Payment payment4 = Payment.builder().price(20000).point(0).finalPrice(20000).status(PaymentStatus.READY).build();
+
+        payment1.changePaymentBySuccess(PaymentStatus.OK, String.valueOf(UUID.randomUUID()));
+        payment2.changePaymentBySuccess(PaymentStatus.OK, String.valueOf(UUID.randomUUID()));
+        payment3.changePaymentBySuccess(PaymentStatus.OK, String.valueOf(UUID.randomUUID()));
+
+        paymentRepository.saveAll(Arrays.asList(payment1, payment2, payment3, payment4));
+
+        Reservation reservation1 = Reservation.builder().counselDate(LocalDate.of(2024,8,18)).account(accountDetail1).counselTime(LocalTime.of(12,0))
+                .location("서울 강남구").counselor(counselor1).counselContent("학업/진로").reservationUid(String.valueOf(UUID.randomUUID())).payment(payment1).build();
+        Reservation reservation2 = Reservation.builder().counselDate(LocalDate.of(2024,8,19)).account(accountDetail2).counselTime(LocalTime.of(15,30))
+                .location("인천 연수구").counselor(counselor2).counselContent("대인관계").reservationUid(String.valueOf(UUID.randomUUID())).payment(payment2).build();
+        Reservation reservation3 = Reservation.builder().counselDate(LocalDate.of(2024,8,20)).account(accountDetail1).counselTime(LocalTime.of(16,0))
+                .location("서울 은평구").counselor(counselor3).counselContent("정신건강").reservationUid(String.valueOf(UUID.randomUUID())).payment(payment3).build();
+        Reservation reservation4 = Reservation.builder().counselDate(LocalDate.of(2024,8,21)).account(accountDetail2).counselTime(LocalTime.of(14,0))
+                .location("인천 부평구").counselor(counselor2).counselContent("성격").reservationUid(String.valueOf(UUID.randomUUID())).payment(payment4).build();
 
 
 
